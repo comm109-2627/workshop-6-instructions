@@ -4,7 +4,7 @@
 
 #### Note on workshop attendance...
 
-Remember to upload your work to the ELE assessed portfolio quiz before leaving the session.
+Remember that the assessment portfolio requires submissions from 6/8 workshops, and you must upload your work to the ELE assessed portfolio quiz before leaving the session.
 
 ---
 
@@ -68,65 +68,105 @@ x3 = roll_n_dice(3)
 print(f"The result roll_n_dice(3) was: {x3}")
 ```
 
-** Task 1.3*
+**Task 1.3**
 
-Restructure and change the function `roll_n_dice` so that  - if not provided `n_dice` will take a default value of 1 
+Restructure and change the function `roll_n_dice` so that `n_dice` will take a default value of 2 if not provided.
 
- - it takes the two arguments `n_dice` and `n_sides` (e.g. an 8 sided dice can return values 1-8)
+Add a call to demonstrate this function working (storing the result in `x4`) and using a suitable message to show the result.
 
- - if not provided `n_sides` will take a default value of 6
+**Task 1.4**
 
-Below the function definition add additional demonstrations storing the results as `demo2` `demo3` and `demo4`, displaying the results in each case:
+Now change the function so it takes the two arguments `n_dice` and `n_sides` (e.g. an 8 sided dice can return values 1-8)
 
-`demo2` : shows how to calls the function to roll three 10 sided dice
+If not provided `n_sides` will take a default value of 6
 
-`demo3` : shows how to call the function to roll four dice with 8 sides, specifying the arguments in reverse order 
+At the bottom of the code add additional demonstrations storing the results as `x4` `x5` and `x6` displaying the results in each case:
+
+`x4` : shows how to call the function without specifying arguments (so that the default values are used).
+
+`x5` : shows how to calls the function to roll three 10 sided dice
+
+`x6` : shows how to call the function to roll four dice with 8 sides, specifying the arguments in reverse order 
 
 (i.e. the values must passed in the order `n_sides` then `n_dice` as keyword arguments).
 
-`demo4` : shows how to call the function without specifying arguments (so that the default values are used).
 
 
 ---
 
-### Part 2: Finding the length of the longest word
+### Part 2: Functions with any number of arguments
 
-Work in code file `6b_part2.py`
+Work in code file `6_part2.py`
 
-This contains the following starter code that defines a function `max_length` that takes three arguments (`word1`, `word2` and `word3`) that contain strings.
-
-The function makes a list of all the provided words then returns the length of the longest word in the list. 
-
-It then demonstrates how to call this function to using three example words, stores the value returned in variable `demo1`, and displays the result.
+Start with the following code that demonstrates a way to check items in a list to identify the highest value it contains:
 
 ```python
-def max_length(word1, word2, word3):
-    word_list = [ word1, word2, word3 ]   
-    # you do not need to change the code below
-    longest_word = word_list[0]
-    for item in word_list:
-        if len(item) > len(longest_word):
-            longest_word = item
-    return len(longest_word)
+def max_value_in_list(my_values):
+    current_max = None
+    print("start of loop")
 
+    for item in my_values:
+        print(f"running loop with item: {item} and current_max: {current_max}")
+        if current_max is None:
+            current_max = item
+        elif item ??? current_max: # complete this line
+            current_max = item
 
-demo1 = max_length("cat","beetles","dogs")
-print(demo1)
+    print("end of loop")
+    print(f"current_max: {current_max}")
+
+    return current_max
+
+demo1 = max_value_in_list([4,2,8,1,9])
+print(f"result of call to max_value_in_list was: {demo1}")
 ```
 
-Edit the function code so that the function will work with any set of words passed as individual input arguments. 
+**Task 2.1**
+
+Write a new function `max_value()` which can take any number of input values as arguments, i.e. be called using
+
+```
+max_value( 4, 2, 8, 1, 9 )  # uses individual values instead of list
+```
+
+**Hint** all you should need to change is the line `for item in my_values:` where instead of iterating over list `my_values` you will iterate over the input arguments.
+
+When the code is working, remove any `print()` statements also it doesn't display any output when it runs.
 
 To demonstrate add the following additional code examples to show your function works correctly in each case: 
 
 ```python
-demo2 = max_length("cat")
-print(demo2)
+demo2 = max_value(99)
+print(f"result of call to max_value with 99 was: {demo2}")
 
-demo3 = max_length("cat","dogs")
-print(demo3)
+demo3 = max_value(2,99)
+print(f"result of call to max_value with 2,99 was: {demo3}")
 
-demo4 = max_length("mouse","cat","apple","banana","enormous")
-print(demo4)
+demo4 = max_value(6,8,3)
+print(f"result of call to max_value with 6,8,3 was: {demo4}")
+```
+
+**Task 2.2**
+
+Write a function `max_length` that takes any number of input words then returns the length of the longest word in the list. 
+
+It then demonstrates how to call this function to using three example words, stores the value returned in variable `demo1`, and displays the result.
+
+```python
+demo5 = max_length("cat","beetles","dogs")
+print(f"result of call to max_length with: cat beetles dogs was: {demo5}")
+```
+
+**Task 2.3**
+
+Write the following code examples to show your function works correctly in each case: 
+
+```
+demo6 : run the function with the single word "cats"
+
+demo7 : run the function with the two words "cats" and "dogs"
+
+demo7 : run the function with the words "mouse" "cat" "apple" "banana" and "enormous"
 ```
 
 ---
@@ -134,50 +174,67 @@ print(demo4)
 
 ### Part 3: Processing a string to make replacements
 
-Work in code file `6b_part3.py`
+Work in code file `6_part3.py`
 
-This contains the following starter code that defines a function `process_text`.
+This contains the following starter code that defines a function `process_str_v1`.
 
-This is set up to take two arguments:
+```
+def process_str_v1(mystr, target1, replacement1, target2, replacement2):
+    task_dict = {target1: replacement1,
+                 target2: replacement2}
 
- - `mystr` that contains a text string to process
- - an additional argument that contains a dictionary that defines a set of word replacements pairs, e.g.
-
-`mod_dict = {"cat": "dog", "red": "blue"}`  
-
-It then demonstrates how to call this function, stores the value returned in variable `demo1` and displays the result.
-
-```python
-def process_str(mystr, mod_dict):
-    for key, value in mod_dict.items():
+    print(f"task_dict stores: {task_dict}")
+    print("starting loop")
+    for key, value in task_dict:
         # you do not need to change the code below
         target = key
         replacement = value
+        print(f"mystr is now: {mystr}")
         print(f" ( replacing {target} with {replacement} ) ")
         mystr = mystr.replace(target, replacement)
+
+    print("ended loop")
+    print(f"mystr is: {mystr}")
     return mystr
 
-mod_dict = {"cat": "dog", "red": "blue"}
-demo1 = process_str("The cat sat on the red mat.",mod_dict)
+demo1 = process_str_v1("The cat sat on the red mat.", cat, dog, red, blue )
 print(demo1)
 ```
 
-Edit the function code so that the function will work with any set of target and replacement pairs passed as an arbitrary number of keyword arguments `kwargs`. 
+This is set up to take arguments:
 
-You should update the demonstration code so that it makes the replacements `cat -> dog` and `red -> blue` using your modified function, i.e.
+ - `mystr` that contains a text string to process
+ - `target1` a word to replace
+ - `replacement1` the word to use when placing `target1`
+ - `target2` a word to replace
+ - `replacement2` the word to use when placing `target1`
+   
+It then demonstrates how to call this function, stores the value returned in variable `demo1` and displays the result.
+
+**Task 3.1**
+
+Add another demonstration of the function that will take in the string `Rubber is very bendy` and replace `hard` with `easy` and `Rubber` with `Coding`, store the result in `demo2` and display the result.
+
+**Task 3.2**
+
+Write a new function `process_str_v2` which will work with any set of target and replacement pairs passed as an arbitrary number of keyword arguments `kwargs`. 
+
+i.e. to carry out the original string replacement we would run:
 
 ```python
-demo1 = process_str("The cat sat on the red mat.", cat="dog", red="blue")
-print(demo1)
+demo3 = process_str_v2("The cat sat on the red mat.", cat="dog", red="blue")
+print(demo3)
 ```
+**Task 3.3**
 
 Then add the additional demonstrations to show that your code works correctly in each case.
 
 ```python
-demo2 = process_str("The cat sat on the red mat.", cat="mouse")
-print(demo2)
-demo3 = process_str("The cat sat on the red mat.", cat="flea", sat="hopped", mat="dog")
-print(demo3)
+demo4 = process_str_v2("The cat sat on the red mat.", cat="mouse")
+print(demo4)
+
+demo5 = process_str_v2("The cat sat on the red mat.", cat="flea", sat="hopped", mat="dog")
+print(demo5)
 ```
 
 ---
@@ -186,14 +243,11 @@ print(demo3)
 
 The following python code defines some functions to display greetings. 
 
-**Note there is a typo in the code template - please correct it as below**
-
 ```python
 def say_hello(name):
     print(f"Hello {name}!")
 
 def say_hi(name=None):
-    # TYPO PLEASE EDIT TO REMOVE THE not
     if name is None:
         print("Hi, whoever you are!")
     else:
@@ -203,9 +257,13 @@ def say_hi(name=None):
 
 We want to store these functions so that we can call them as python module `greetings`.
 
+***Task 4.1**
+
 Create an appropriately named python module file to do this. (e.g. click on the new file icon in the file panel toolbar).
 
-Then work in code file `6b_part4.py`
+***Task 4.2**
+
+Next work in code file `6_part4.py`
 
 Show how to import the `greetings` module and call the functions it contains using appropriate code so that the file will produce the following output:
 
@@ -216,19 +274,5 @@ Hi, whoever you are!
 ```
 
 ---
-
-### Submitting your work
-
-Run the following lines in the terminal to stage, commit and push your code back to your GitHub repository:
-
-```
-git add .
-git commit -m "completed 6b"
-git push
-```
-
-To check your work has been saved you can run the line of code below in the terminal to get the web address of the repository in GitHub. Goto the repository and check the completed code files are stored.
-
-```
 git config --get remote.origin.url
 ```
