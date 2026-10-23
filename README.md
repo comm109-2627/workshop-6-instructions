@@ -1,15 +1,10 @@
-# Python Week 6 Assessed Workshop
+# Python Week 5 Workshop
 
 ---
 
 #### Note on workshop attendance...
 
-Please make sure you sign the workshop attendance sheet. 
-
-Work that has been submitted via remote working for core workshops will only be accepted if:
-
- - students have arranged this with module lead (Phil)
- - students agree that inclusion of remote work in assessed portfolio may require a viva discussion to check understanding
+Remember to upload your work to the ELE assessed portfolio quiz before leaving the session.
 
 ---
 
@@ -19,11 +14,7 @@ You may use the following cheat sheets if you need to look up any Python command
 
 https://github.com/phil-lewis-exe/PythonCheatSheets
 
-**This week you may not use any other websites to help you code.**
-
-**You must ask if you need to use a website to translate the task questions**
-
-**Mobile phones may not be used in class**
+**This week try not to use other websites to help you code or translate the questions, as these won't be allowed in the graded workshops at the end of term.**
 
 ---
 
@@ -32,32 +23,57 @@ https://github.com/phil-lewis-exe/PythonCheatSheets
 
 ### Part 1: Rolling Dice
 
-Work in code file `6b_part1.py`
+Work in code file `6_part1.py`
 
 This contains starter code that:
 
- - defines a function to simulate the rolls of a number of dice. 
- - demonstrates how to call this function to roll two dice, storing the dice roll as variable `demo1` and displays the result.
+ - defines a function to simulate a dice roll. 
+ - demonstrates how to call this function to roll a dice, storing the dice roll as variable `demo1` then displaying the result.
 
 ```python
+# library to generate random numbers
 import random
 
-def roll_dice(n_dice):
+def roll_one_dice():
     n_sides = 6
-    # you do not need to change the code below
-    rolls = []
-    for i in range(n_dice):
-        rolls.append(random.randint(1,n_sides))
-    return rolls
+    roll = numpy.randint(1,n_sides))
+    return roll
 
-demo1 = roll_dice(2)
-print(demo1)
+x1 = roll_dice()
+print(f"The result of the 1st call to roll_dice() was: {x1}")
 ```
 
-Restructure and change the function so that:
+** Task 1.1**
+
+Add code that runs the function again, storing the result as `x2` and that prints the message:
+
+```
+"The result of the 2st call to roll_dice() was: ..."
+```
+
+Run the program three times. What do you notice?
+
+** Task 1.2**
+
+Directly below the definition for `roll_one_dice` (above the line `x1 = ...`) write the function `roll_n_dice`. 
+
+This should take a single argument `n_dice` that determines how many dice are being rolled.
+
+You can adapt the code above, but start by defining an empty list `rolls`, then using a `for` loop to fill the list with the right amount of dice rolls (as stored in `n_dice`).
+
+Once you have written your function, add the following lines of code to the end of your program to test it.
+
+```
+x3 = roll_n_dice(3)
+print(f"The result roll_n_dice(3) was: {x3}")
+```
+
+** Task 1.3*
+
+Restructure and change the function `roll_n_dice` so that  - if not provided `n_dice` will take a default value of 1 
 
  - it takes the two arguments `n_dice` and `n_sides` (e.g. an 8 sided dice can return values 1-8)
- - if not provided `n_dice` will take a default value of 1 
+
  - if not provided `n_sides` will take a default value of 6
 
 Below the function definition add additional demonstrations storing the results as `demo2` `demo3` and `demo4`, displaying the results in each case:
